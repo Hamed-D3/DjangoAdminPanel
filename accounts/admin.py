@@ -12,7 +12,7 @@ class UserAdmin(DjangoUserAdmin):
     form = UserUpdateForm
 
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('username', 'email', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'phone', 'avatar')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
@@ -24,7 +24,7 @@ class UserAdmin(DjangoUserAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
-    list_display = ('show_avatar', 'email', 'first_name', 'last_name', 'phone', 'is_staff')
-    list_display_links = ('show_avatar', 'email')
+    list_display = ('show_avatar', 'username', 'email', 'first_name', 'last_name', 'phone', 'is_staff')
+    list_display_links = ('show_avatar','username', 'email')
     search_fields = ('email', 'first_name', 'last_name', 'phone')
     ordering = ('date_joined', 'email',)

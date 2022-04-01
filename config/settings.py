@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # allauth
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 
     # utits
     'django_extensions',
@@ -118,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'fa-ir'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'asia/tehran'
 
@@ -166,8 +167,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 # LOGIN_REDIRECT_URL = ''
 # LOGOUT_REDIRECT_URL = ''
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-# ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False

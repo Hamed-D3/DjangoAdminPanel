@@ -1,4 +1,3 @@
-from email.policy import default
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
@@ -44,16 +43,16 @@ IRAN_PHONE_NUMBER_VALIDATOR = RegexValidator(r'^(0098|\+?98|0)9\d{9}$', message=
 
 
 class User(AbstractUser):
-    # remove username and email required
-    username = None
+    # # remove username and email required
+    # username = None
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     email = models.EmailField(_('email address'), unique=True)
 
     # add new field
     phone = models.CharField(max_length=15, unique=True, blank=True, validators=[IRAN_PHONE_NUMBER_VALIDATOR], verbose_name="شماره موبایل")
     avatar = models.ImageField(upload_to='avatars/', default='default/user.png', verbose_name="عکس پروفایل")
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
 
     def show_avatar(self):
         return format_html(f"<img src='{self.avatar.url}' width='30' height='30'>")
