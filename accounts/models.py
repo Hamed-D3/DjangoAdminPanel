@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, validate_image_file_extension
 from django.utils.html import format_html
 from django.db import models
 
@@ -51,7 +51,7 @@ class User(AbstractUser):
 
     # add new field
     phone = models.CharField(max_length=15, unique=True, blank=True, validators=[IRAN_PHONE_NUMBER_VALIDATOR], verbose_name="شماره موبایل")
-    avatar = models.ImageField(upload_to='avatars/', default='default/user.png', verbose_name="عکس پروفایل")
+    avatar = models.ImageField(upload_to='avatars/', default='default/user.png', validators=[validate_image_file_extension], verbose_name="عکس پروفایل")
 
 
     def show_avatar(self):
