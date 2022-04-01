@@ -44,8 +44,11 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
 
-    # extensions
+    # utits
     'django_extensions',
+
+    # my app
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
@@ -150,7 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = "Info@site.com"
-# AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # `allauth` config
@@ -163,8 +166,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 # LOGIN_REDIRECT_URL = ''
 # LOGOUT_REDIRECT_URL = ''
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+# ACCOUNT_UNIQUE_EMAIL = True
