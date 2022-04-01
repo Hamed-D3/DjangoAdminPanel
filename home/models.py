@@ -10,14 +10,15 @@ def validate_only_one_instance(obj):
         raise ValidationError(f"فقط میتونی یک تنظیمات برای سایتت تنظیم کنی! همونی که موجوده رو ویرایش کن.")
 
 class GeneralSetting(models.Model):
-    website_name = models.CharField(max_length=300, null=True, blank=True, default="پنل ادمین جنگو", verbose_name="نام وب سایت")
-    website_logo = models.ImageField(upload_to='website/', null=True, blank=True, default='default/logo.png', validators=[validate_image_file_extension], verbose_name="لوگو وب سایت")
-    website_favico = models.ImageField(upload_to='website/', null=True, blank=True, default='default/ico.png', validators=[validate_image_file_extension], verbose_name="فیو آیکون وب سایت")
-    website_addr = models.URLField(default='http://site.com', null=True, blank=True, validators=[URLValidator], verbose_name="آدرس وب سایت")
-    website_email = models.EmailField(default='info@site.com', null=True, blank=True, validators=[EmailValidator], verbose_name="ایمیل وب سایت")
-    website_phone = models.CharField(max_length=30, default='+98 021 123456', null=True, blank=True, verbose_name="شماره تماس وب سایت")
-    terms = models.TextField(default='قوانین استفاده از وبسایت...', null=True, blank=True, verbose_name='قوانین وب سایت')
-    about_us = models.TextField(default='درباره ما...', null=True, blank=True, verbose_name='قوانین وب سایت')
+    website_name = models.CharField(max_length=300, null=True, blank=True, default="پنل ادمین جنگو", verbose_name="نام")
+    website_logo = models.ImageField(upload_to='website/', null=True, blank=True, default='default/logo.png', validators=[validate_image_file_extension], verbose_name="لوگو")
+    website_favico = models.ImageField(upload_to='website/', null=True, blank=True, default='default/ico.png', validators=[validate_image_file_extension], verbose_name="فیو آیکون")
+    website_url = models.URLField(default='http://site.com', null=True, blank=True, validators=[URLValidator], verbose_name="آدرس اینترنتی")
+    website_email = models.EmailField(default='info@site.com', null=True, blank=True, validators=[EmailValidator], verbose_name="ایمیل")
+    website_phone = models.CharField(max_length=30, default='+98 021 123456', null=True, blank=True, verbose_name="شماره تماس")
+    website_addr = models.CharField(max_length=1000, null=True, blank=True, default="تهران - سید خندان - واحد 2", verbose_name='آدرس')
+    terms = models.TextField(default='قوانین استفاده از وبسایت...', null=True, blank=True, verbose_name='قوانین')
+    about_us = models.TextField(default='درباره ما...', null=True, blank=True, verbose_name='درباره')
 
     class Meta:
         verbose_name = "تظیمات وب سایت"
