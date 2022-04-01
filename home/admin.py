@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GeneralSetting, Category
+from .models import GeneralSetting
 
 # Register your models here.
 class GeneralSettingAdmin(admin.ModelAdmin):
@@ -7,11 +7,4 @@ class GeneralSettingAdmin(admin.ModelAdmin):
     list_display_links = ('website_name', )
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'parent')
-    list_display_links = ('title', )
-    search_fields = ('title', 'parent')
-
-
 admin.site.register(GeneralSetting, GeneralSettingAdmin)
-admin.site.register(Category, CategoryAdmin)
