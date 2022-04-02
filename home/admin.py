@@ -1,10 +1,8 @@
 from django.contrib import admin
-from .models import GeneralSetting
+from .models import GeneralSetting, WebSiteSetting, AboutUsSetting, ContactUsSetting
 
 # Register your models here.
-class GeneralSettingAdmin(admin.ModelAdmin):
-    list_display = ('website_name', 'website_url', 'website_addr', 'website_email', 'website_phone')
-    list_display_links = ('website_name', )
-
-
-admin.site.register(GeneralSetting, GeneralSettingAdmin)
+admin.site.register(GeneralSetting)
+admin.site.register(WebSiteSetting)
+admin.site.register(AboutUsSetting)
+admin.site.register(ContactUsSetting)
