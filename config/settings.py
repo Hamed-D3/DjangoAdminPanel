@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
     'category.apps.CategoryConfig',
-    'user.apps.UserConfig',
+    'role.apps.RoleConfig',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(BASE_DIR / 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
