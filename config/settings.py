@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_extensions',
 
     # my app
+    'utils.apps.UtilsConfig',
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
     'category.apps.CategoryConfig',
