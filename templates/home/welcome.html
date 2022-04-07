@@ -68,11 +68,12 @@
 <body style="font-family: IranYekan">
 <div class="flex-center position-ref full-height">
         <div class="top-right links">
-            {% if request.user.is_authenticate %}
+            {% if user.is_authenticated %}
                 <a href="#homeURL">خانه</a>
+                <a href="{% url 'account_logout' %}">خارج شدن</a>
             {% else %}
-                <a href="#loginURL">ورود</a>
-                <a href="#registerURL">ثبت نام</a>
+                <a href="{% url 'account_login' %}">ورود</a>
+                <a href="{% url 'account_signup' %}">ثبت نام</a>
             {% endif %}
         </div>
 

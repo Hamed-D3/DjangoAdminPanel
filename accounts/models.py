@@ -50,7 +50,7 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
 
     # add new field
-    phone = models.CharField(max_length=15, unique=True, blank=True, validators=[IRAN_PHONE_NUMBER_VALIDATOR], verbose_name="شماره موبایل")
+    phone = models.CharField(max_length=15, unique=True, null=True, blank=True, validators=[IRAN_PHONE_NUMBER_VALIDATOR], verbose_name="شماره موبایل")
     avatar = models.ImageField(upload_to='avatars/', default='default/user.png', validators=[validate_image_file_extension], verbose_name="عکس پروفایل")
 
 

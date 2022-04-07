@@ -1,0 +1,147 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl" >
+	
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<head>
+
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+		
+		<!-- Favicon -->
+		<link rel="icon" href="{% static 'dashboard/assets/img/brand/favicon.ico' %}" type="image/x-icon"/>
+
+		<!-- Title -->
+		<title>ورود</title>
+
+		<!-- Bootstrap css-->
+		<link href="{% static 'dashboard/assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"/>
+
+		<!-- Icons css-->
+		<link href="{% static 'dashboard/assets/plugins/web-fonts/icons.css' %}" rel="stylesheet"/>
+		<link href="{% static 'dashboard/assets/plugins/web-fonts/font-awesome/font-awesome.min.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/plugins/web-fonts/plugin.css' %}" rel="stylesheet"/>
+
+		<!-- Style css-->
+		<link href="{% static 'dashboard/assets/css-rtl/style/style.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/css-rtl/skins.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/css-rtl/dark-style.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/css-rtl/colors/default.css' %}" rel="stylesheet">
+		
+		
+		<!-- Color css-->
+		<link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'dashboard/assets/css-rtl/colors/color.css' %}">
+
+	</head>
+
+	<body class="main-body leftmenu">
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="{% static 'dashboard/assets/img/loader.svg' %}" class="loader-img" alt="Loader">
+		</div>
+		<!-- End Loader -->
+
+		
+		<!-- Page -->
+		<div class="page main-signin-wrapper">
+
+			<!-- Row -->
+			<div class="row signpages text-center">
+				<!-- for show text message files in message folder not error message -->
+				<!-- {% if messages %}
+					<div>
+						<strong>پیام‌ها</strong>
+						<ul>
+							{% for message in messages %}
+							<li style="list-style: none;">{{message}}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				{% endif %} -->
+				{% if form.non_field_errors %}
+					<div class="errors">
+						{% for error in form.non_field_errors %}
+							<div class="invalid-feedback d-block">{{error}}</div>
+						{% endfor %}	
+					</div>
+				{% endif %}
+				<div class="col-md-12">
+					<div class="card">
+						<div class="row row-sm">
+							<div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-primary details">
+								<div class="mt-5 pt-5 p-2 pos-absolute">
+									<div class="clearfix"></div>
+									<img src="{% static 'dashboard/assets/img/svgs/user.svg' %}" class="ht-100 mb-0" alt="user">
+									<h5 class="mt-4 text-white">حساب کاربری برای خود بسازید</h5>
+									<span class="tx-white-6 tx-13 mb-5 mt-xl-0">برای ایجاد ، کشف و ارتباط با جامعه جهانی ثبت نام کنید</span>
+								</div>
+							</div>
+							<div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
+								<div class="container-fluid">
+									<div class="row row-sm">
+										<div class="card-body mt-2 mb-2">
+											<div class="clearfix"></div>
+											<form class="needs-validation" novalidate method="POST" action="{% url 'account_login' %}">
+												{% csrf_token %}
+												<h5 class="text-right mb-2">به حساب خود وارد شوید</h5>
+												<p class="mb-4 text-muted tx-13 ml-0 text-right">برای ایجاد ، کشف و ارتباط با جامعه جهانی وارد سیستم شوید</p>
+												<div class="form-group text-right">
+													<label>پست الکترونیک</label>
+													{% render_field form.login class="form-control" type="text" placeholder="ایمیل خود را وارد کنید" required="required" %}
+													{% if form.login.errors %}
+														<div class="errors">
+															{% for error in form.login.errors %}
+																<span class="invalid-feedback d-inline">{{error}}</span>
+															{% endfor %}	
+														</div>
+													{% endif %}
+												</div>
+												<div class="form-group text-right">
+													<label>کلمه عبور</label>
+													{% render_field form.password class="form-control" type="password" placeholder="رمز ورود خود را وارد کنید" required="required" %}
+													{% if form.password.errors %}
+														<div class="errors">
+															{% for error in form.password.errors %}
+																<span class="invalid-feedback d-inline">{{error}}</span>
+															{% endfor %}	
+														</div>
+													{% endif %}
+												</div>
+												<button class="btn ripple btn-main-primary btn-block" type="submit">ورود</button>
+											</form>
+											<div class="text-right mt-5 ml-0">
+												<div class="mb-1"><a href="{% url 'account_reset_password' %}">رمز عبور خود را فراموش کرده اید؟</a></div>
+												<div>حساب ندارید؟ <a href="{% url 'account_signup' %}">اینجا ثبت نام کنید</a></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Row -->
+
+		</div>
+		<!-- End Page -->
+
+
+		<!-- Jquery js-->
+		<script src="{% static 'dashboard/assets/plugins/jquery/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap js-->
+		<script src="{% static 'dashboard/assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+		<script src="{% static 'dashboard/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!-- Select2 js-->
+		<script src="{% static 'dashboard/assets/plugins/select2/js/select2.min.js' %}"></script>
+
+		
+		<!-- Custom js -->
+		<script src="{% static 'dashboard/assets/js/custom.js' %}"></script>
+	</body>
+
+</html>
