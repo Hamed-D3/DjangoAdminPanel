@@ -61,13 +61,7 @@
 						</ul>
 					</div>
 				{% endif %} -->
-				{% if form.non_field_errors %}
-					<div class="errors">
-						{% for error in form.non_field_errors %}
-							<div class="invalid-feedback d-block">{{error}}</div>
-						{% endfor %}	
-					</div>
-				{% endif %}
+				{% include 'account/_non_field_errors.html' %}
 				<div class="col-md-12">
 					<div class="card">
 						<div class="row row-sm">
