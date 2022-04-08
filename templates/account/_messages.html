@@ -1,0 +1,11 @@
+<!-- for show text message files in message folder not error message -->
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show position-fixed alert-corner" role="alert">
+        <span class="ml-4">{{message}}</span>
+        <button type="button" class="close left-close d-flex" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,8 @@
+.alert-corner {
+    top: 1rem !important;
+    left: 1rem !important;
+}
+
+.left-close {
+    left: 0 !important;
+}
