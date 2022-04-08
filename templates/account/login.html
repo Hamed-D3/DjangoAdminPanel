@@ -109,6 +109,20 @@
 														</div>
 													{% endif %}
 												</div>
+												<div class="form-group text-right">
+													{% render_field form.remember class="form-check-input" type="checkbox" required="required" %}
+													<label class="form-check-label mr-4">مرا به خاطر بسپار</label>
+													{% if form.password.errors %}
+														<div class="errors">
+															{% for error in form.password.errors %}
+																<span class="invalid-feedback d-inline">{{error}}</span>
+															{% endfor %}	
+														</div>
+													{% endif %}
+												</div>
+												{% if redirect_field_value %}
+													<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+												{% endif %}
 												<button class="btn ripple btn-main-primary btn-block" type="submit">ورود</button>
 											</form>
 											<div class="text-right mt-5 ml-0">
