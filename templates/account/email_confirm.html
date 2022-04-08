@@ -1,0 +1,100 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl" >
+	
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<head>
+
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+		
+		<!-- Favicon -->
+		<link rel="icon" href="{% static 'dashboard/assets/img/brand/favicon.ico' %}" type="image/x-icon"/>
+
+		<!-- Title -->
+		<title>تایید ایمیل</title>
+
+		<!-- Bootstrap css-->
+		<link href="{% static 'dashboard/assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"/>
+
+		<!-- Icons css-->
+		<link href="{% static 'dashboard/assets/plugins/web-fonts/icons.css' %}" rel="stylesheet"/>
+		<link href="{% static 'dashboard/assets/plugins/web-fonts/font-awesome/font-awesome.min.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/plugins/web-fonts/plugin.css' %}" rel="stylesheet"/>
+
+		<!-- Style css-->
+		<link href="{% static 'dashboard/assets/css-rtl/style/style.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/css-rtl/skins.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/css-rtl/dark-style.css' %}" rel="stylesheet">
+		<link href="{% static 'dashboard/assets/css-rtl/colors/default.css' %}" rel="stylesheet">
+
+		<!-- custom style -->
+		<link href="{% static 'dashboard/assets/css-rtl/style/custom.css' %}" rel="stylesheet"/>
+		
+		<!-- Color css-->
+		<link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'dashboard/assets/css-rtl/colors/color.css' %}">
+
+	</head>
+
+	<body class="main-body leftmenu">
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="{% static 'dashboard/assets/img/loader.svg' %}" class="loader-img" alt="Loader">
+		</div>
+		<!-- End Loader -->
+
+		
+		<!-- Page -->
+		<div class="page main-signin-wrapper">
+
+			<!-- Row -->
+			<div class="row signpages text-center">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="row row-sm">
+                            {% include 'account/_messages.html' %}
+                            <h1>تایید ایمیل</h1>
+							{% if confirmation %}
+
+                            {% user_display confirmation.email_address.user as user_display %}
+                            {% confirmation.email_address.email as email %}
+                            <p>آیا آدرس ایمیل <a href="mailto:{{ email }}">{{ email }}</a> را برای کاربر {{ user_display }} تایید میکنید؟ </p>
+                            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                            {% csrf_token %}
+                                <button class="btn btn-success" type="submit">تایید</button>
+                            </form>
+
+                            {% else %}
+
+                            {% url 'account_email' as email_url %}
+                            <p>این لینک آدرس تاییدیه ایمیل منقضی شده است. لطفا از طریق این <a href="{{ email_url }}">لینک</a> درخواست تاییدیه ایمیل جدیدی را صادر کنید.</p>
+                            {% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Row -->
+
+		</div>
+		<!-- End Page -->
+
+
+		<!-- Jquery js-->
+		<script src="{% static 'dashboard/assets/plugins/jquery/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap js-->
+		<script src="{% static 'dashboard/assets/plugins/bootstrap/js/jquery-3.5.1.slim.min.js' %}"></script>
+		<script src="{% static 'dashboard/assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+		<script src="{% static 'dashboard/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!-- Select2 js-->
+		<script src="{% static 'dashboard/assets/plugins/select2/js/select2.min.js' %}"></script>
+
+		
+		<!-- Custom js -->
+		<script src="{% static 'dashboard/assets/js/custom.js' %}"></script>
+	</body>
+
+</html>

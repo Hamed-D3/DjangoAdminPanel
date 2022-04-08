@@ -75,7 +75,7 @@
 											<form class="needs-validation" novalidate method="POST" action="{% url 'account_signup' %}">
 												{% csrf_token %}
 												<div class="form-group text-right">
-													<label>پست الکترونیک</label>
+													<label>ایمیل</label>
 													{% render_field form.email class="form-control" type="text" placeholder="ایمیل خود را وارد کنید" required="required" %}
 													{% if form.email.errors %}
 														<div class="errors">
