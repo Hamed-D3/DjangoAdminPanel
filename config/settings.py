@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # utits
     'django_extensions',
     'widget_tweaks',
+    'coverage',
 
     # my app
     'utils.apps.UtilsConfig',
@@ -98,6 +99,9 @@ DATABASES = {
         'USER':config('USER'),
         'PASSWORD':config('PASSWORD'),
         'default-character-set':'utf8',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 

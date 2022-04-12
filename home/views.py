@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
-from .models import WebSiteSetting as Setting
+from home.models import WebSiteSetting as Setting
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -8,5 +8,13 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['setting'] = Setting.objects.get(pk=1)
+        if Setting.objects.all():
+            context['setting'] = Setting.objects.all()[0]
+        else:
+            context['setting'] = {
+                'name':'setting',
+                'url':'http://site.com',
+                'logo':'',
+                'favico':'',
+            }
         return context
