@@ -1,5 +1,6 @@
 from django.core.validators import validate_image_file_extension, URLValidator, EmailValidator
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 from django.db import models
 
 # Create your models here.
@@ -38,6 +39,9 @@ class WebSiteSetting(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('home:website-setting', args=(self.slug, ))
+
     def clean(self):
         validate_only_one_instance(self)
 
@@ -59,6 +63,9 @@ class AboutUsSetting(models.Model):
     def __str__(self):
         return "درباره ما"
 
+    def get_absolute_url(self):
+        return reverse('home:aboutus-setting', args=(self.slug, ))
+
     def clean(self):
         validate_only_one_instance(self)
 
@@ -75,6 +82,9 @@ class ContactUsSetting(models.Model):
 
     def __str__(self):
         return 'تماس با ما'
+
+    def get_absolute_url(self):
+        return reverse('home:contactus-setting', args=(self.slug, ))
 
     def clean(self):
         validate_only_one_instance(self)

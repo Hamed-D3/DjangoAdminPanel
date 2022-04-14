@@ -1,0 +1,76 @@
+{% extends 'profiles/base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h2 class="main-content-title tx-24 mg-b-5">تنظیمات {{ verbose_name }}</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">تنظیمات</li>
+            <li class="breadcrumb-item active" aria-current="page"> {{ verbose_name }}</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card custom-card">
+            <div class="card-body">
+
+                <form role="form" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {% for item in form %}
+                            {% if item.field.widget.input_type == 'text' %}
+                                <div class="form-group">
+                                    <label>{{item.field.name}}</label>
+                                    {% render_field item class="form-control" type="text" %}
+                                </div>
+                            {% elif item.field.widget.input_type == 'email' %}
+                                <div class="form-group">
+                                    <label>{{item.field.name}}</label>
+                                    {% render_field item class="form-control" type="email" %}
+                                </div>
+                            {% elif item.field.widget.input_type == 'number' %}
+                                <div class="form-group">
+                                    <label>{{item.field.name}}</label>
+                                    {% render_field item class="form-control" type="number" %}
+                                </div>
+                            {% elif item.field.widget.input_type == 'textarea' %}
+                                <div class="form-group">
+                                    <label>{{item.field.name}}</label>
+                                    {% render_field item class="form-control" type="textarea" %}
+                                </div>
+                            {% elif item.field.widget.input_type == 'file' %}
+                                <div class="row">
+                                    <div class="form-group">
+                                        {{item.label_tag}}
+                                        <div>
+                                            {% render_field item class="custom-file-input" style="opacity:100;" type="file" %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <label>{{item.field.name}}</label>
+                                    {% render_field item class="form-control" %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">ویرایش</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
