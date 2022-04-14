@@ -28,6 +28,7 @@ class WebSiteSetting(models.Model):
     logo = models.ImageField(upload_to='website/', null=True, blank=True, default='default/logo.png', validators=[validate_image_file_extension], verbose_name="لوگو")
     favico = models.ImageField(upload_to='website/', null=True, blank=True, default='default/ico.png', validators=[validate_image_file_extension], verbose_name="فیو آیکون")
     url = models.URLField(default='http://site.com', null=True, blank=True, validators=[URLValidator], verbose_name="آدرس اینترنتی")
+    slug = models.SlugField(default='general-setting', verbose_name="نشانک")
     parent_setting = models.OneToOneField(GeneralSetting, on_delete=models.CASCADE, verbose_name="زیرمجموعه تنظیمات")
 
     class Meta:
@@ -47,6 +48,7 @@ class AboutUsSetting(models.Model):
     email = models.EmailField(default='info@site.com', null=True, blank=True, validators=[EmailValidator], verbose_name="ایمیل")
     phone = models.CharField(max_length=30, default='+98 021 123456', null=True, blank=True, verbose_name="شماره تماس")
     addr = models.CharField(max_length=1000, null=True, blank=True, default="تهران - سید خندان - واحد 2", verbose_name='آدرس')
+    slug = models.SlugField(default='about-us', verbose_name="نشانک")
     parent_setting = models.OneToOneField(GeneralSetting, on_delete=models.CASCADE, verbose_name="زیرمجموعه تنظیمات")
 
 
@@ -63,6 +65,7 @@ class AboutUsSetting(models.Model):
 
 class ContactUsSetting(models.Model):
     contact_us = models.TextField(default='متن تماس با ما', null=True, blank=True, verbose_name='تماس با ما')
+    slug = models.SlugField(default='contact-us', verbose_name="نشانک")
     parent_setting = models.OneToOneField(GeneralSetting, on_delete=models.CASCADE, verbose_name="زیرمجموعه تنظیمات")
 
 
