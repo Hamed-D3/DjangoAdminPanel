@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserChangeForm
-from .widgets import CustomeClearableFileInput
+from utils.widgets import CustomeClearableFileInput
 from .models import User
 
 class UserUpdateForm(ModelForm):
