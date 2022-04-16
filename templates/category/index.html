@@ -1,0 +1,76 @@
+{% extends 'profiles/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div>
+            <h2 class="main-content-title tx-24 mg-b-5"> دسته بندی ها </h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">دسته بندی ها</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-create">ایجاد دسته بندی</button>
+
+                    <!-- Create Modal -->
+					
+					<!-- /.modal -->
+
+                    <table id="table" class="table table-bordered table-striped text-center mt-3">
+                        <thead>
+                        <tr>
+                            <th>نام</th>
+                            <th>زیر دسته</th>
+                            <th>عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+						{% for category in categories %}
+                            <tr>
+                                <td>
+                                    {{category.title}}
+                                </td>
+                                <td>
+                                    {% if category.parent %}
+                                        {{category.parent}}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-sliders-h"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <button type="button" class="btn btn-success dropdown-item" data-toggle="modal" data-target="#modal-edit$category->id" >ویرایش</button>
+                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-delete$category->id" >حذف</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <!-- Delete Modal -->
+							
+                            <!-- /.modal -->
+
+                            <!-- Change Modal -->
+							
+                            <!-- /.modal -->
+
+                        {% endfor %}
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
