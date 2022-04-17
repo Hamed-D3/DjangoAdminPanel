@@ -21,7 +21,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('profiles/', include('profiles.urls')),
-    path('profiles/', include('category.urls')),
+    path('profiles/category/', include('category.urls')),
 ]
 
 # add static url
