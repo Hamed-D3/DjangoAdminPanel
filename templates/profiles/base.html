@@ -453,6 +453,9 @@
 <script src="{% static 'dashboard/assets/plugins/bootstrap/js/popper.min.js' %}"></script>
 <script src="{% static 'dashboard/assets/plugins/bootstrap/js/bootstrap-rtl.js' %}"></script>
 
+<!-- modal form js -->
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
 <!-- Perfect-scrollbar js -->
 <script src="{% static 'dashboard/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js' %}"></script>
 
@@ -491,6 +494,8 @@
 <!-- Switcher js -->
 <script src="{% static 'dashboard/assets/switcher/js/switcher-rtl.js' %}"></script>
 
+{% block additional-js %}
+{% endblock additional-js %}
 
 </body>
 </html>

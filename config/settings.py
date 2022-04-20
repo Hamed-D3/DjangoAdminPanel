@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # utits
     'django_extensions',
+    'bootstrap_modal_forms',
     'widget_tweaks',
     'coverage',
 

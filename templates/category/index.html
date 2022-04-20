@@ -19,10 +19,10 @@
         <div class="col-lg-12">
             <div class="card custom-card">
                 <div class="card-body">
-                    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-create">ایجاد دسته بندی</button>
+                    <button class="btn btn-primary mb-3" id="create-book-sync" type="button" name="button">ایجاد دسته بندی</button>
 
                     <!-- Create Modal -->
-					
+                    {% include "category/_modal.html" %}
 					<!-- /.modal -->
 
                     <table id="table" class="table table-bordered table-striped text-center mt-3">
@@ -74,3 +74,130 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block additional-js %}
+<script type="text/javascript">
+    $(function () {
+        // // Login
+        // $("#login-btn").modalForm({
+        //   formURL: ""
+        // });
+
+        // //  Signup
+        // $("#signup-btn").modalForm({
+        //   formURL: ""
+        // });
+
+        // Create book synchronous
+        function createBookSyncModalForm() {
+          $("#create-book-sync").modalForm({
+              formURL: "{% url 'category:category-create' %}",
+              modalID: "#create-modal"
+          });
+        }
+        createBookSyncModalForm();
+
+        // // Create book asynchronous button
+        // // message
+        // var asyncSuccessMessageCreate = [
+        //   "<div ",
+        //   "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+        //   "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+        //   "Success: Book was created.",
+        //   "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+        //   "<span aria-hidden='true'>&times;</span>",
+        //   "</button>",
+        //   "</div>",
+        //   "<script>",
+        //   "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+        //   "<\/script>"
+        // ].join("");
+
+        // // modal form
+        // function createBookAsyncModalForm() {
+        //   $("#create-book-async").modalForm({
+        //       formURL: "",
+        //       modalID: "#create-modal",
+        //       asyncUpdate: true,
+        //       asyncSettings: {
+        //         closeOnSubmit: true,
+        //         successMessage: asyncSuccessMessageCreate,
+        //         dataUrl: "books/",
+        //         dataElementId: "#books-table",
+        //         dataKey: "table",
+        //         addModalFormFunction: reinstantiateModalForms
+        //       }
+        //   });
+        // }
+        // createBookAsyncModalForm();
+
+        // // Update book asynchronous button
+        // // message
+        // var asyncSuccessMessageUpdate = [
+        //   "<div ",
+        //   "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+        //   "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+        //   "Success: Book was updated.",
+        //   "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+        //   "<span aria-hidden='true'>&times;</span>",
+        //   "</button>",
+        //   "</div>",
+        //   "<script>",
+        //   "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+        //   "<\/script>"
+        // ].join("");
+
+        // // modal form
+        // function updateBookModalForm() {
+        //   $(".update-book").each(function () {
+        //     $(this).modalForm({
+        //       formURL: $(this).data("form-url"),
+        //       asyncUpdate: true,
+        //       asyncSettings: {
+        //         closeOnSubmit: false,
+        //         successMessage: asyncSuccessMessageUpdate,
+        //         dataUrl: "books/",
+        //         dataElementId: "#books-table",
+        //         dataKey: "table",
+        //         addModalFormFunction: reinstantiateModalForms
+        //       }
+        //     });
+        //   });
+        // }
+        // updateBookModalForm();
+
+        // // Delete book buttons - formURL is retrieved from the data of the element
+        // function deleteBookModalForm() {
+        //   $(".delete-book").each(function () {
+        //       $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+        //   });
+        // }
+        // deleteBookModalForm();
+
+        // // Read book buttons
+        // function readBookModalForm() {
+        //   $(".read-book").each(function () {
+        //       $(this).modalForm({formURL: $(this).data("form-url")});
+        //   });
+        // }
+        // readBookModalForm();
+
+        // function reinstantiateModalForms() {
+        //   createBookAsyncModalForm();
+        //   readBookModalForm();
+        //   updateBookModalForm();
+        //   deleteBookModalForm();
+        // }
+
+        // // Filter books button
+        // $("#filter-book").each(function () {
+        //     $(this).modalForm({formURL: $(this).data("form-url")});
+        // });
+
+        // // Hide message
+        // $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+        //     $(".alert").slideUp(500);
+        // });
+    });
+</script>
+{% endblock additional-js %}
