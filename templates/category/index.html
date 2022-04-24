@@ -19,13 +19,13 @@
         <div class="col-lg-12">
             <div class="card custom-card">
                 <div class="card-body">
-                    <button class="btn btn-primary mb-3" id="create-book-sync" type="button" name="button">ایجاد دسته بندی</button>
+                    <button class="btn btn-primary mb-3" id="create-category-async" type="button" name="button">ایجاد دسته بندی</button>
 
                     <!-- Create Modal -->
                     {% include "category/_modal.html" %}
 					<!-- /.modal -->
 
-                    <table id="table" class="table table-bordered table-striped text-center mt-3">
+                    <table id="categories-table" class="table table-bordered table-striped text-center mt-3">
                         <thead>
                         <tr>
                             <th>نام</th>
@@ -51,8 +51,8 @@
                                         <i class="fas fa-sliders-h"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <button type="button" class="btn btn-success dropdown-item" data-toggle="modal" data-target="#modal-edit$category->id" >ویرایش</button>
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-delete$category->id" >حذف</button>
+                                        <button type="button" class="update-category btn btn-success dropdown-item" data-form-url="{% url 'category:category-update' category.pk %}" >ویرایش</button>
+                                        <button type="button" class="delete-category btn btn-danger dropdown-item" data-form-url="{% url 'category:category-delete' category.pk %}">حذف</button>
                                     </div>
                                 </td>
 
@@ -78,126 +78,102 @@
 {% block additional-js %}
 <script type="text/javascript">
     $(function () {
-        // // Login
-        // $("#login-btn").modalForm({
-        //   formURL: ""
-        // });
-
-        // //  Signup
-        // $("#signup-btn").modalForm({
-        //   formURL: ""
-        // });
-
-        // Create book synchronous
-        function createBookSyncModalForm() {
+        // Create category synchronous
+        function createCategorySyncModalForm() {
           $("#create-book-sync").modalForm({
               formURL: "{% url 'category:category-create' %}",
               modalID: "#create-modal"
           });
         }
-        createBookSyncModalForm();
+        createCategorySyncModalForm();
 
-        // // Create book asynchronous button
-        // // message
-        // var asyncSuccessMessageCreate = [
-        //   "<div ",
-        //   "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-        //   "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-        //   "Success: Book was created.",
-        //   "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-        //   "<span aria-hidden='true'>&times;</span>",
-        //   "</button>",
-        //   "</div>",
-        //   "<script>",
-        //   "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-        //   "<\/script>"
-        // ].join("");
+        // Create category asynchronous button
+        // message
+        var asyncSuccessMessageCreate = [
+          "<div ",
+          "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+          "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+          "موفق: دسته بندی با موفقیت ثبت شد.",
+          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+          "<span aria-hidden='true'>&times;</span>",
+          "</button>",
+          "</div>",
+          "<script>",
+          "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+          "<\/script>"
+        ].join("");
 
-        // // modal form
-        // function createBookAsyncModalForm() {
-        //   $("#create-book-async").modalForm({
-        //       formURL: "",
-        //       modalID: "#create-modal",
-        //       asyncUpdate: true,
-        //       asyncSettings: {
-        //         closeOnSubmit: true,
-        //         successMessage: asyncSuccessMessageCreate,
-        //         dataUrl: "books/",
-        //         dataElementId: "#books-table",
-        //         dataKey: "table",
-        //         addModalFormFunction: reinstantiateModalForms
-        //       }
-        //   });
-        // }
-        // createBookAsyncModalForm();
+        // modal form
+        function createCategoryAsyncModalForm() {
+          $("#create-category-async").modalForm({
+              formURL: "{% url 'category:category-create' %}",
+              modalID: "#create-modal",
+              asyncUpdate: true,
+              asyncSettings: {
+                closeOnSubmit: true,
+                successMessage: asyncSuccessMessageCreate,
+                dataUrl: "{% url 'category:category-list' %}",
+                dataElementId: "#categories-table",
+                dataKey: "table",
+                addModalFormFunction: reinstantiateModalForms
+              }
+          });
+        }
+        createCategoryAsyncModalForm();
 
-        // // Update book asynchronous button
-        // // message
-        // var asyncSuccessMessageUpdate = [
-        //   "<div ",
-        //   "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-        //   "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-        //   "Success: Book was updated.",
-        //   "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-        //   "<span aria-hidden='true'>&times;</span>",
-        //   "</button>",
-        //   "</div>",
-        //   "<script>",
-        //   "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-        //   "<\/script>"
-        // ].join("");
+        // Update category asynchronous button
+        // message
+        var asyncSuccessMessageUpdate = [
+          "<div ",
+          "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+          "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+          "موفق: دسته بندی با موفقیت ویرایش شد.",
+          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+          "<span aria-hidden='true'>&times;</span>",
+          "</button>",
+          "</div>",
+          "<script>",
+          "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+          "<\/script>"
+        ].join("");
 
-        // // modal form
-        // function updateBookModalForm() {
-        //   $(".update-book").each(function () {
-        //     $(this).modalForm({
-        //       formURL: $(this).data("form-url"),
-        //       asyncUpdate: true,
-        //       asyncSettings: {
-        //         closeOnSubmit: false,
-        //         successMessage: asyncSuccessMessageUpdate,
-        //         dataUrl: "books/",
-        //         dataElementId: "#books-table",
-        //         dataKey: "table",
-        //         addModalFormFunction: reinstantiateModalForms
-        //       }
-        //     });
-        //   });
-        // }
-        // updateBookModalForm();
+        // modal form
+        function updateCategoryModalForm() {
+          $(".update-category").each(function () {
+            $(this).modalForm({
+              formURL: $(this).data("form-url"),
+              asyncUpdate: true,
+              asyncSettings: {
+                closeOnSubmit: true,
+                successMessage: asyncSuccessMessageUpdate,
+                dataUrl: "{% url 'category:category-list' %}",
+                dataElementId: "#categories-table",
+                dataKey: "table",
+                addModalFormFunction: reinstantiateModalForms
+              }
+            });
+          });
+        }
+        updateCategoryModalForm();
 
-        // // Delete book buttons - formURL is retrieved from the data of the element
-        // function deleteBookModalForm() {
-        //   $(".delete-book").each(function () {
-        //       $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
-        //   });
-        // }
-        // deleteBookModalForm();
+        // Delete category buttons - formURL is retrieved from the data of the element
+        function deleteCategoryModalForm() {
+          $(".delete-category").each(function () {
+              $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+          });
+        }
+        deleteCategoryModalForm();
 
-        // // Read book buttons
-        // function readBookModalForm() {
-        //   $(".read-book").each(function () {
-        //       $(this).modalForm({formURL: $(this).data("form-url")});
-        //   });
-        // }
-        // readBookModalForm();
+        function reinstantiateModalForms() {
+          createCategoryAsyncModalForm();
+          updateCategoryModalForm();
+          deleteCategoryModalForm();
+        }
 
-        // function reinstantiateModalForms() {
-        //   createBookAsyncModalForm();
-        //   readBookModalForm();
-        //   updateBookModalForm();
-        //   deleteBookModalForm();
-        // }
-
-        // // Filter books button
-        // $("#filter-book").each(function () {
-        //     $(this).modalForm({formURL: $(this).data("form-url")});
-        // });
-
-        // // Hide message
-        // $(".alert").fadeTo(2000, 500).slideUp(500, function () {
-        //     $(".alert").slideUp(500);
-        // });
+        // Hide message
+        $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+            $(".alert").slideUp(500);
+        });
     });
 </script>
 {% endblock additional-js %}
