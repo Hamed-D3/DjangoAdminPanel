@@ -14,12 +14,22 @@
         </div>
     </div>
 
+    {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
+            <button aria-label="بستن" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">×</span>
+            </button>
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card custom-card">
                 <div class="card-body">
-                    <button class="btn btn-primary mb-3" id="create-category-async" type="button" name="button">ایجاد دسته بندی</button>
+                    <button class="btn btn-primary mb-3" id="create-book-sync" type="button" name="button">ایجاد دسته بندی</button>
 
                     <!-- Create Modal -->
                     {% include "category/_modal.html" %}
@@ -57,14 +67,6 @@
                                 </td>
 
                             </tr>
-                            <!-- Delete Modal -->
-							
-                            <!-- /.modal -->
-
-                            <!-- Change Modal -->
-							
-                            <!-- /.modal -->
-
                         {% endfor %}
 
                     </table>
@@ -87,74 +89,15 @@
         }
         createCategorySyncModalForm();
 
-        // Create category asynchronous button
-        // message
-        var asyncSuccessMessageCreate = [
-          "<div ",
-          "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-          "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-          "موفق: دسته بندی با موفقیت ثبت شد.",
-          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-          "<span aria-hidden='true'>&times;</span>",
-          "</button>",
-          "</div>",
-          "<script>",
-          "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-          "<\/script>"
-        ].join("");
-
-        // modal form
-        function createCategoryAsyncModalForm() {
-          $("#create-category-async").modalForm({
-              formURL: "{% url 'category:category-create' %}",
-              modalID: "#create-modal",
-              asyncUpdate: true,
-              asyncSettings: {
-                closeOnSubmit: true,
-                successMessage: asyncSuccessMessageCreate,
-                dataUrl: "{% url 'category:category-list' %}",
-                dataElementId: "#categories-table",
-                dataKey: "table",
-                addModalFormFunction: reinstantiateModalForms
-              }
-          });
-        }
-        createCategoryAsyncModalForm();
-
-        // Update category asynchronous button
-        // message
-        var asyncSuccessMessageUpdate = [
-          "<div ",
-          "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-          "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-          "موفق: دسته بندی با موفقیت ویرایش شد.",
-          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-          "<span aria-hidden='true'>&times;</span>",
-          "</button>",
-          "</div>",
-          "<script>",
-          "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-          "<\/script>"
-        ].join("");
-
-        // modal form
-        function updateCategoryModalForm() {
+        function updateCategorySyncModalForm() {
           $(".update-category").each(function () {
             $(this).modalForm({
               formURL: $(this).data("form-url"),
-              asyncUpdate: true,
-              asyncSettings: {
-                closeOnSubmit: true,
-                successMessage: asyncSuccessMessageUpdate,
-                dataUrl: "{% url 'category:category-list' %}",
-                dataElementId: "#categories-table",
-                dataKey: "table",
-                addModalFormFunction: reinstantiateModalForms
-              }
+              asyncUpdate: false,
             });
           });
         }
-        updateCategoryModalForm();
+        updateCategorySyncModalForm();
 
         // Delete category buttons - formURL is retrieved from the data of the element
         function deleteCategoryModalForm() {
@@ -165,15 +108,8 @@
         deleteCategoryModalForm();
 
         function reinstantiateModalForms() {
-          createCategoryAsyncModalForm();
-          updateCategoryModalForm();
           deleteCategoryModalForm();
         }
-
-        // Hide message
-        $(".alert").fadeTo(2000, 500).slideUp(500, function () {
-            $(".alert").slideUp(500);
-        });
     });
 </script>
 {% endblock additional-js %}
